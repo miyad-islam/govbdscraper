@@ -1,3 +1,5 @@
+import random
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -15,7 +17,9 @@ class WebScraper:
         self.folder_path = f"Output/{self.folder_name}"
         self.output_file = f"{self.folder_path}/webscrap.json"
         self.visited_urls_file = f"{self.folder_path}/visited_urls.txt"
-        self.driver = webdriver.Edge() #browser
+
+        # Configure browser options
+        self.driver = self.configure_browser()
         self.visited_urls = set()
         self.all_data = {}
 
@@ -24,6 +28,34 @@ class WebScraper:
 
         # Load existing data
         self.load_data()
+
+    def configure_browser(self):
+        """Configure browser to appear more human-like"""
+        options = webdriver.EdgeOptions()
+
+        # General browser options
+        options.add_argument("--start-maximized")
+        options.add_argument("--disable-blink-features=AutomationControlled")
+        options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        options.add_experimental_option("useAutomationExtension", False)
+
+        # Set realistic user agent
+        user_agents = [
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0",
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0"
+        ]
+        options.add_argument(f"user-agent={random.choice(user_agents)}")
+
+        # Additional stealth settings
+        options.add_argument("--disable-infobars")
+        options.add_argument("--disable-extensions")
+        options.add_argument("--disable-popup-blocking")
+        options.add_argument("--disable-notifications")
+        options.add_argument("--disable-save-password-revision")
+
+        driver = webdriver.Edge(options=options)
+
+        return driver
 
     def load_data(self):
         """Load existing scraped data and visited URLs."""
