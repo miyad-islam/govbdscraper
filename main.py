@@ -6,7 +6,7 @@ import pyfiglet
 import threading
 
 # Set appearance and color theme
-ctk.set_appearance_mode("Dark")  # Modes: "System", "Dark", "Light"
+ctk.set_appearance_mode("system")  # Modes: "System", "Dark", "Light"
 ctk.set_default_color_theme("blue")  # Themes: "blue", "green", "dark-blue"
 
 # Make base_url a global variable
@@ -25,7 +25,7 @@ class App(ctk.CTk):
         self.loading_label = None
         self.animation_active = False
         self.current_thread = None
-
+        self.scraper = None  # Add this line to store the scraper instance
         # Create main container
         self.main_frame = ctk.CTkFrame(self, corner_radius=10)
         self.main_frame.pack(pady=20, padx=20, fill="both", expand=True)
@@ -42,6 +42,8 @@ class App(ctk.CTk):
         # Initialize extraction variables
         self.extract_type_var = ctk.StringVar(value="class")
         self.file_path = ""
+
+        self.url_entry.bind("<Return>", lambda event: self.start_scraping())
 
     def create_ascii_art(self):
         ascii_art = pyfiglet.figlet_format("Web Scraper")
@@ -86,7 +88,7 @@ class App(ctk.CTk):
 
         self.extract_btn = ctk.CTkButton(
             button_frame,
-            text="Start Extraction",
+            text="Extract Data",
             command=self.ask_for_extraction,
             width=200,
             height=40,
@@ -96,6 +98,19 @@ class App(ctk.CTk):
             hover_color="#265A8C"
         )
         self.extract_btn.pack(pady=10)
+
+        self.stop_btn = ctk.CTkButton(
+            button_frame,
+            text="Stop Scraping",
+            command=self.stop_scraping,  # Corrected
+            width=200,
+            height=40,
+            corner_radius=8,
+            font=ctk.CTkFont(size=14, weight="bold"),
+            fg_color="#2CC985",
+            hover_color="#207A4B"
+        )
+        self.stop_btn.pack(pady=10)
 
     def show_loading_animation(self):
         # Always create a new loading label
@@ -129,8 +144,8 @@ class App(ctk.CTk):
     def start_scraping_thread(self):
         global base_url
         try:
-            scraper = WebScraper(base_url)
-            scraper.start_crawling()
+            self.scraper = WebScraper(base_url)  # Store the instance
+            self.scraper.start_crawling()
             self.after(0, self.on_scraping_success)
         except Exception as e:
             self.after(0, self.on_scraping_error, e)
@@ -160,10 +175,17 @@ class App(ctk.CTk):
         messagebox.showinfo("Success", "Scraping complete!\nReady to extraction.")
 
     def on_scraping_error(self, error):
-        self.hide_loading_animation()
+        self.hide_loading_animation()   
         self.scrape_btn.configure(state="normal")
         self.extract_btn.configure(state="normal")
         messagebox.showerror("Error", f"Scraping failed: {str(error)}")
+
+    def stop_scraping(self):
+        try:
+            if self.scraper is not None:
+                self.scraper.stop_crawling()
+        except Exception as e:
+            self.after(0, self.on_scraping_error, e)
 
     def ask_for_extraction(self):
         self.clear_main_frame()
@@ -172,9 +194,23 @@ class App(ctk.CTk):
         file_frame = ctk.CTkFrame(self.main_frame, fg_color="transparent")
         file_frame.pack(pady=10)
 
+        # Heading label for the file entry
+        ctk.CTkLabel(file_frame, text="Select JSON file (optional)", font=ctk.CTkFont(size=12)).pack(pady=5)
+
+        # Determine default placeholder based on base_url
+        default_placeholder = "Select JSON file (optional)"
+        global base_url
+        if base_url:
+            try:
+                folder_name = base_url.split("://")[1]
+                default_path = f"Output/{folder_name}/webscrap.json"
+                default_placeholder = default_path
+            except IndexError:
+                pass  # Handle URL format issues if any
+
         self.file_entry = ctk.CTkEntry(
             file_frame,
-            placeholder_text="Select JSON file (optional)",
+            placeholder_text=default_placeholder,
             width=400,
             height=35
         )
@@ -197,33 +233,32 @@ class App(ctk.CTk):
 
         ctk.CTkLabel(type_frame, text="Extract by:", font=ctk.CTkFont(size=14)).pack(side="left")
 
-        class_radio = ctk.CTkRadioButton(
-            type_frame,
-            text="Class",
-            variable=self.extract_type_var,
-            value="class",
-            font=ctk.CTkFont(size=14)
-        )
-        class_radio.pack(side="left", padx=10)
+        # class_radio = ctk.CTkRadioButton(
+        #     type_frame,
+        #     text="Class",
+        #     variable=self.extract_type_var,
+        #     value="class",
+        #     font=ctk.CTkFont(size=14)
+        # )
+        # class_radio.pack(side="left", padx=10)
 
-        id_radio = ctk.CTkRadioButton(
-            type_frame,
-            text="ID",
-            variable=self.extract_type_var,
-            value="id",
-            font=ctk.CTkFont(size=14)
-        )
-        id_radio.pack(side="left", padx=10)
+        # id_radio = ctk.CTkRadioButton(
+        #     type_frame,
+        #     text="ID",
+        #     variable=self.extract_type_var,
+        #     value="id",
+        #     font=ctk.CTkFont(size=14)
+        # )
+        # id_radio.pack(side="left", padx=10)
 
-        # Target Input
+        # In the ask_for_extraction method, replace the radio button section with:
         self.target_entry = ctk.CTkEntry(
             self.main_frame,
-            placeholder_text="Enter class/ID name...",
+            placeholder_text='Enter targets (e.g., c="header",i="content",c="footer")',
             width=300,
             height=35,
-            font=ctk.CTkFont(size=14)
-        )
-        self.target_entry.pack(pady=15)
+            font=ctk.CTkFont(size=14))
+        self.target_entry.pack(pady=10)
 
         # Start Button
         self.start_btn = ctk.CTkButton(
@@ -236,7 +271,7 @@ class App(ctk.CTk):
             hover_color="#207A4B",
             font=ctk.CTkFont(size=14, weight="bold")
         )
-        self.start_btn.pack(pady=20)
+        self.start_btn.pack(pady=15)
 
         # Start Over Button
         start_over_btn = ctk.CTkButton(
@@ -245,57 +280,69 @@ class App(ctk.CTk):
             command=self.reset_to_main,
             width=200,
             height=40,
-            fg_color="#D33F49",
+            fg_color="#D33000",
             hover_color="#9A2B32",
             font=ctk.CTkFont(size=14, weight="bold")
         )
-        start_over_btn.pack(pady=50)
+        start_over_btn.pack(pady=15)
 
     def reset_to_main(self):
         """Reset the UI to the initial state"""
         self.clear_main_frame()
         self.file_path = ""
         self.extract_type_var.set("class")
+
+        # Recreate UI elements
         self.create_url_input()
         self.create_action_buttons()
         self.hide_loading_animation()  # Ensure loading is hidden
+
+        # Rebind the Enter key to start scraping
+        self.url_entry.bind("<Return>", lambda event: self.start_scraping())
+
     def perform_extraction(self):
-        target = self.target_entry.get().strip()
-        if not target:
-            messagebox.showerror("Error", "Please enter a class/ID name.")
+        raw_targets = self.target_entry.get().strip()
+        if not raw_targets:
+            messagebox.showerror("Error", "Please enter targets (e.g., c=\"header\",i=\"content\")")
             return
 
-        self.start_btn.configure(state="disabled")
-        self.show_loading_animation()
+        # Get file path if provided
+        file_path = self.file_entry.get().strip() or None
 
-        extract_type = self.extract_type_var.get()
-        file_path = self.file_path
-        self.current_thread = threading.Thread(
-            target=lambda: self.run_extraction(extract_type, target, file_path),
-            daemon=True
-        )
-        self.current_thread.start()
+        try:
+            self.start_btn.configure(state="disabled")
+            self.show_loading_animation()
+
+            if file_path:
+                extract_information.extract_data_from_file(file_path, raw_targets)
+            else:
+                extract_information.extract_data(base_url, raw_targets)
+
+            messagebox.showinfo("Success", "Extraction completed!")
+
+        except Exception as e:
+            messagebox.showerror("Error", f"Extraction failed: {str(e)}")
+        finally:
+            self.hide_loading_animation()
+            self.start_btn.configure(state="normal")
 
     def run_extraction(self, extract_type, target, file_path=None):
         try:
             if file_path:
-                extract_information.extract_data_from_file(
-                    extract_type,
-                    target,
-                    file_path
-                )
+                extract_information.extract_data_from_file(extract_type, target, file_path)
             else:
                 if not base_url:
                     self.after(0, lambda: messagebox.showerror("Error", "No URL or file selected!"))
                     return
-                extract_information.extract_data(
-                    extract_type,
-                    target,
-                    base_url
-                )
+
+                extract_information.extract_data(extract_type, target, base_url)
+
+            # Call success method in the main thread
             self.after(0, self.on_extraction_success)
+
         except Exception as e:
-            self.after(0, self.on_extraction_error, e)
+            # Call error method in the main thread
+            self.after(0, lambda: self.on_extraction_error(e))
 
     def on_extraction_success(self):
         self.hide_loading_animation()

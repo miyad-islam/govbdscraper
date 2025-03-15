@@ -1,165 +1,122 @@
 import json
 import os
-
 from bs4 import BeautifulSoup
 
 
-def extract_data(extract_type, target_name,base_url):
-    """
-    Extracts data from a JSON file containing HTML content.
+def parse_targets(raw_targets):
+    """Parse user input into structured targets."""
+    targets = []
+    for part in raw_targets.split(','):
+        part = part.strip()
+        if '=' not in part:
+            raise ValueError(f"Invalid target format: {part}")
+        type_part, name_part = part.split('=', 1)
+        type_code = type_part.strip().lower()
+        if type_code not in ('c', 'i'):
+            raise ValueError(f"Invalid type prefix: {type_part}")
+        # Clean and validate name
+        name = name_part.strip().strip('"\'').strip()
+        if not name:
+            raise ValueError(f"Empty target name in: {part}")
+        targets.append({
+            'type': 'class' if type_code == 'c' else 'id',
+            'name': name
+        })
+    return targets
 
-    Args:
-    - extract_type (str): The type of extraction ('class' or 'id').
-    - target_name (str): The name of the class or id to extract.
-    - input_json (str): The input JSON file containing HTML content (default 'webscrap.json').
-    - output_json (str): The output JSON file where extracted information will be saved (default 'extracted_info.json').
 
-    Returns:
-    - None
-    """
-    folder_name = base_url.split("://")[1]  # Splits at '://' and takes the second part
+def extract_data(base_url, raw_targets):
+    """Extract mixed classes/IDs from scraped data."""
+    folder_name = base_url.split("://")[1]
     folder_path = f"Output/{folder_name}"
     input_json = f"{folder_path}/webscrap.json"
     output_json = f"{folder_path}/extracted_info.json"
 
-    # Load the JSON file
+    # Load data
     try:
         with open(input_json, "r", encoding="utf-8") as f:
             all_data = json.load(f)
-    except FileNotFoundError:
-        print(f"Error: The file {input_json} was not found.")
-        return
-    except json.JSONDecodeError:
-        print("Error: Failed to decode the JSON file.")
-        return
+    except Exception as e:
+        raise RuntimeError(f"Failed to load data: {str(e)}")
 
-    # Validate extraction type
-    if extract_type not in ["class", "id"]:
-        print("Invalid extraction type. Please use 'class' or 'id'.")
-        return
+    # Parse targets
+    try:
+        targets = parse_targets(raw_targets)
+    except ValueError as e:
+        raise RuntimeError(f"Invalid target input: {str(e)}")
 
-    # Store extracted information
     extracted_data = []
     seq_counter = 1
 
-    # Parse HTML content and extract information
     for url, html_content in all_data.items():
         soup = BeautifulSoup(html_content, "html.parser")
+        entry = {"seq": seq_counter, "url": url}
 
-        if extract_type == "class":
-            # Find all elements with the specified class
-            elements = soup.find_all(class_=target_name)
-        elif extract_type == "id":
-            # Find the element with the specified id
-            element = soup.find(id=target_name)
-            elements = [element] if element else []
+        for idx, target in enumerate(targets, 1):
+            elements = []
+            if target['type'] == 'class':
+                elements = soup.find_all(class_=target['name'])
+            elif target['type'] == 'id':
+                elem = soup.find(id=target['name'])
+                if elem: elements = [elem]
 
-        # Extract text from the elements
-        for element in elements:
-            extracted_data.append({
-                "seq": seq_counter,  # Add sequence number
-                "url": url,
-                "text": element.get_text(strip=True)
-            })
-            seq_counter += 1  # Increment the sequence counter
+            # Combine element texts
+            text = " ".join([e.get_text(strip=True) for e in elements if e])
 
-    # Save the extracted information to a JSON file
+            # Add to entry
+            entry[f"{target['type']}{idx}"] = target['name']
+            entry[f"text{idx}"] = text
+
+        extracted_data.append(entry)
+        seq_counter += 1
+
+    # Save results
     try:
         with open(output_json, "w", encoding="utf-8") as f:
             json.dump(extracted_data, f, ensure_ascii=False, indent=4)
-        print(f"Extracted information saved to {output_json}")
-    except IOError:
-        print(f"Error: Could not write to {output_json}.")
+    except Exception as e:
+        raise RuntimeError(f"Failed to save results: {str(e)}")
 
 
-def get_output_directory(file_path):
-    """
-    Extracts the directory path from a full file path and ensures it ends with a slash.
-
-    Args:
-        file_path (str): Full path to a file (e.g., 'C:/path/to/file.json')
-
-    Returns:
-        str: Directory path ending with slash (e.g., 'C:/path/to/')
-    """
-    # Get the directory path using os.path
-    directory = os.path.dirname(file_path)
-
-    # Convert backslashes to forward slashes for consistency
-    directory = directory.replace('\\', '/')
-
-    # Add trailing slash if not present
-    if not directory.endswith('/'):
-        directory += '/'
-
-    return directory
-
-
-def extract_data_from_file(extract_type, target_name,filepath):
-    """
-    Extracts data from a JSON file containing HTML content.
-
-    Args:
-    - extract_type (str): The type of extraction ('class' or 'id').
-    - target_name (str): The name of the class or id to extract.
-    - input_json (str): The input JSON file containing HTML content (default 'webscrap.json').
-    - output_json (str): The output JSON file where extracted information will be saved (default 'extracted_info.json').
-
-    Returns:
-    - None
-    """
-    # folder_name = base_url.split("://")[1]  # Splits at '://' and takes the second part
-    # folder_path = f"Output/{folder_name}"
-    input_json = filepath
-    folder_path = get_output_directory(input_json)
-    output_json = f"{folder_path}/extracted_info1.json"
-
-    # Load the JSON file
+def extract_data_from_file(filepath, raw_targets):
+    """Extract from custom JSON file."""
     try:
-        with open(input_json, "r", encoding="utf-8") as f:
+        with open(filepath, "r", encoding="utf-8") as f:
             all_data = json.load(f)
-    except FileNotFoundError:
-        print(f"Error: The file {input_json} was not found.")
-        return
-    except json.JSONDecodeError:
-        print("Error: Failed to decode the JSON file.")
-        return
+    except Exception as e:
+        raise RuntimeError(f"Failed to load file: {str(e)}")
 
-    # Validate extraction type
-    if extract_type not in ["class", "id"]:
-        print("Invalid extraction type. Please use 'class' or 'id'.")
-        return
+    # Parse targets
+    try:
+        targets = parse_targets(raw_targets)
+    except ValueError as e:
+        raise RuntimeError(f"Invalid target input: {str(e)}")
 
-    # Store extracted information
     extracted_data = []
     seq_counter = 1
 
-    # Parse HTML content and extract information
     for url, html_content in all_data.items():
         soup = BeautifulSoup(html_content, "html.parser")
+        entry = {"seq": seq_counter, "url": url}
 
-        if extract_type == "class":
-            # Find all elements with the specified class
-            elements = soup.find_all(class_=target_name)
-        elif extract_type == "id":
-            # Find the element with the specified id
-            element = soup.find(id=target_name)
-            elements = [element] if element else []
+        for idx, target in enumerate(targets, 1):
+            elements = []
+            if target['type'] == 'class':
+                elements = soup.find_all(class_=target['name'])
+            elif target['type'] == 'id':
+                elem = soup.find(id=target['name'])
+                if elem: elements = [elem]
 
-        # Extract text from the elements
-        for element in elements:
-            extracted_data.append({
-                "seq": seq_counter,  # Add sequence number
-                "url": url,
-                "text": element.get_text(strip=True)
-            })
-            seq_counter += 1  # Increment the sequence counter
+            text = " ".join([e.get_text(strip=True) for e in elements if e])
+            entry[f"{target['type']}{idx}"] = target['name']
+            entry[f"text{idx}"] = text
 
-    # Save the extracted information to a JSON file
+        extracted_data.append(entry)
+        seq_counter += 1
+
+    output_path = f"{os.path.dirname(filepath)}/extracted_info1.json"
     try:
-        with open(output_json, "w", encoding="utf-8") as f:
+        with open(output_path, "w", encoding="utf-8") as f:
             json.dump(extracted_data, f, ensure_ascii=False, indent=4)
-        print(f"Extracted information saved to {output_json}")
-    except IOError:
-        print(f"Error: Could not write to {output_json}.")
-
+    except Exception as e:
+        raise RuntimeError(f"Failed to save results: {str(e)}")

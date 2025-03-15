@@ -29,6 +29,9 @@ class WebScraper:
         # Load existing data
         self.load_data()
 
+
+
+
     def configure_browser(self):
         """Configure browser to appear more human-like"""
         options = webdriver.EdgeOptions()
@@ -129,3 +132,7 @@ class WebScraper:
         self.crawl_and_scrape(self.base_url)
         self.driver.quit()
         print("Crawling completed. Data saved to webscrap.json")
+
+    def stop_crawling(self):
+        if self.driver:
+            self.driver.quit()  # Close the driver
