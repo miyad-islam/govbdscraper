@@ -46,7 +46,7 @@ class App(ctk.CTk):
         self.url_entry.bind("<Return>", lambda event: self.start_scraping())
 
     def create_ascii_art(self):
-        ascii_art = pyfiglet.figlet_format("Web Scraper")
+        ascii_art = pyfiglet.figlet_format("Scraper")
         self.title_label = ctk.CTkLabel(
             self.main_frame,
             text=ascii_art,
@@ -84,7 +84,7 @@ class App(ctk.CTk):
             fg_color="#2CC985",
             hover_color="#207A4B"
         )
-        self.scrape_btn.pack(pady=10)
+        self.scrape_btn.pack(side="left", padx=10)
 
         self.extract_btn = ctk.CTkButton(
             button_frame,
@@ -97,20 +97,35 @@ class App(ctk.CTk):
             fg_color="#3B8ED0",
             hover_color="#265A8C"
         )
-        self.extract_btn.pack(pady=10)
-
+        self.extract_btn.pack(side="left", padx=10)
+        # Modify the Start Over button section:
+        button_frame2 = ctk.CTkFrame(self.main_frame, fg_color="transparent")
+        button_frame2.pack(pady=15)
         self.stop_btn = ctk.CTkButton(
-            button_frame,
+            button_frame2,
             text="Stop Scraping",
             command=self.stop_scraping,  # Corrected
             width=200,
             height=40,
             corner_radius=8,
             font=ctk.CTkFont(size=14, weight="bold"),
-            fg_color="#2CC985",
-            hover_color="#207A4B"
+            fg_color="#a85832",
+            hover_color="#7a4820"
         )
-        self.stop_btn.pack(pady=10)
+        self.stop_btn.pack(side="left", padx=10)
+
+        self.exit_btn = ctk.CTkButton(
+            button_frame2,
+            text="Exit",
+            command=self.destroy,
+            width=200,
+            height=40,
+            corner_radius=8,
+            font=ctk.CTkFont(size=14, weight="bold"),
+            fg_color="#D33000",
+            hover_color="#9A2B32"
+        )
+        self.exit_btn.pack(side="left", padx=10)
 
     def show_loading_animation(self):
         # Always create a new loading label
@@ -144,11 +159,12 @@ class App(ctk.CTk):
     def start_scraping_thread(self):
         global base_url
         try:
-            self.scraper = WebScraper(base_url)  # Store the instance
-            self.scraper.start_crawling()
+            self.scraper = WebScraper(base_url)
+            self.scraper.start_crawling()  # This should now respect stop_flag
             self.after(0, self.on_scraping_success)
         except Exception as e:
-            self.after(0, self.on_scraping_error, e)
+            if not self.scraper.stop_flag:  # Only show error if not stopped
+                self.after(0, self.on_scraping_error, e)
 
     def start_scraping(self):
         global base_url
@@ -273,10 +289,13 @@ class App(ctk.CTk):
         )
         self.start_btn.pack(pady=15)
 
-        # Start Over Button
+        # Modify the Start Over button section:
+        button_frame = ctk.CTkFrame(self.main_frame, fg_color="transparent")
+        button_frame.pack(pady=15)
+
         start_over_btn = ctk.CTkButton(
-            self.main_frame,
-            text="Start Over",
+            button_frame,
+            text="Back to main",
             command=self.reset_to_main,
             width=200,
             height=40,
@@ -284,7 +303,19 @@ class App(ctk.CTk):
             hover_color="#9A2B32",
             font=ctk.CTkFont(size=14, weight="bold")
         )
-        start_over_btn.pack(pady=15)
+        start_over_btn.pack(side="left", padx=10)
+
+        exit_btn = ctk.CTkButton(
+            button_frame,
+            text="Exit",
+            command=self.destroy,
+            width=200,
+            height=40,
+            fg_color="#D33000",
+            hover_color="#9A2B32",
+            font=ctk.CTkFont(size=14, weight="bold")
+        )
+        exit_btn.pack(side="left", padx=10)
 
     def reset_to_main(self):
         """Reset the UI to the initial state"""

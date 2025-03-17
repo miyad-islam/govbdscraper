@@ -11,6 +11,7 @@ import os
 
 class WebScraper:
     def __init__(self, base_url):
+        self.stop_flag = False  # Add this line
         self.base_url = base_url
         self.domain = urlparse(base_url).netloc
         self.folder_name = base_url.split("://")[1]  # Splits at '://' and takes the second part
@@ -90,7 +91,7 @@ class WebScraper:
 
     def crawl_and_scrape(self, url):
         """Crawl and scrape a given URL."""
-        if url in self.visited_urls and url != self.base_url:
+        if self.stop_flag or url in self.visited_urls and url != self.base_url:
             return
         self.visited_urls.add(url)
 
@@ -119,6 +120,8 @@ class WebScraper:
             # Find all internal links
             links = self.driver.find_elements(By.TAG_NAME, "a")
             for link in links:
+                if self.stop_flag:
+                    break
                 href = link.get_attribute("href")
                 if href and self.domain in urlparse(href).netloc:
                     full_url = urljoin(self.base_url, href)
@@ -134,5 +137,9 @@ class WebScraper:
         print("Crawling completed. Data saved to webscrap.json")
 
     def stop_crawling(self):
+        self.stop_flag = True
         if self.driver:
-            self.driver.quit()  # Close the driver
+            try:
+                self.driver.quit()
+            except:
+                pass
