@@ -24,7 +24,7 @@ class App(ctk.CTk):
         self.title("Modern Web Scraper")
         self.geometry("800x600")
         self.resizable(True, True)
-        self.is_dark_mode = True  # Track theme state
+
         # Initialize animation variables
         self.loading_label = None
         self.animation_active = False
@@ -35,11 +35,10 @@ class App(ctk.CTk):
         self.container_frame = ctk.CTkFrame (self, corner_radius=10, width=600, height=400)
         self.container_frame.place (relx=0.5, rely=0.5, anchor="center")
 
-
         # Create main container
         self.main_frame = ctk.CTkFrame (self.container_frame, corner_radius=10)
         self.main_frame.pack (pady=20, padx=20, fill="both", expand=True)
-        self.create_theme_toggle()
+
         # logo
         self.create_logo()
 
@@ -70,28 +69,8 @@ class App(ctk.CTk):
             self.logo_label = ctk.CTkLabel (self.main_frame, image=logo_ctk_image, text="")
             self.logo_label.image = logo_ctk_image  # Keep a reference to the image
             self.logo_label.pack (pady=20)
-
-
         except Exception as e:
             messagebox.showerror ("Error", f"Failed to load logo: {str (e)}")
-
-    def create_theme_toggle(self):
-        self.theme_toggle = ctk.CTkButton(
-            self.main_frame,
-            text="Dark Mode",
-            command=self.toggle_theme,
-            width=100,
-            height=30,
-            corner_radius=8,
-            font=ctk.CTkFont(size=12))
-        self.theme_toggle.place(relx=1.0, rely=0.0, anchor="ne", x=-10, y=10)
-
-    # Add the toggle_theme method:
-    def toggle_theme(self):
-        self.is_dark_mode = not self.is_dark_mode
-        new_mode = "Dark" if self.is_dark_mode else "Light"
-        ctk.set_appearance_mode(new_mode)
-        self.theme_toggle.configure(text=f"{new_mode} Mode")
 
     def create_url_input(self):
         url_frame = ctk.CTkFrame(self.main_frame, fg_color="transparent")
@@ -229,7 +208,7 @@ class App(ctk.CTk):
         messagebox.showinfo("Success", "Scraping complete!\nReady to extraction.")
 
     def on_scraping_error(self, error):
-        self.hide_loading_animation()
+        self.hide_loading_animation()   
         self.scrape_btn.configure(state="normal")
         self.extract_btn.configure(state="normal")
         messagebox.showerror("Error", f"Scraping failed: {str(error)}")
@@ -243,7 +222,6 @@ class App(ctk.CTk):
 
     def ask_for_extraction(self):
         self.clear_main_frame()
-
 
         # File Selection
         file_frame = ctk.CTkFrame(self.main_frame, fg_color="transparent")
@@ -363,10 +341,8 @@ class App(ctk.CTk):
         self.extract_type_var.set("class")
 
         # Recreate UI elements
-        self.create_theme_toggle()  # Re-add the theme toggle
         self.create_url_input()
         self.create_action_buttons()
-        self.theme_toggle.lift()  # Bring to front
         self.hide_loading_animation()  # Ensure loading is hidden
 
         # Rebind the Enter key to start scraping
@@ -436,7 +412,7 @@ class App(ctk.CTk):
     def clear_main_frame(self):
         self.hide_loading_animation()  # Clean up loading animation
         for widget in self.main_frame.winfo_children():
-            if widget not in [self.logo_label]:
+            if widget not in [self.title_label]:
                 widget.destroy()
 
 
