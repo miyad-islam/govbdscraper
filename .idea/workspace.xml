@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="86d595a0-d88b-41fd-85c1-b7197c708599" name="Changes" comment="feat: Add stop scraping functionality and UI improvements&#10;&#10;This commit introduces the ability to stop the web scraping process&#10;mid-crawl. A stop button has been added to the main UI, which sets&#10;a `stop_flag` in the `WebScraper` class. This flag is checked&#10;periodically during crawling to halt the process gracefully.&#10;&#10;Additional changes:&#10;&#10;- The UI now includes an &quot;Exit&quot; button to close the application.&#10;- The application title in the ascii art is now &quot;Scraper&quot;.&#10;- The layout of the buttons has been improved.&#10;- Fixed an error where the scraping error callback would trigger after&#10;  stopping the scraper.&#10;- Changed &quot;Start Over&quot; button to &quot;Back to main&quot;.">
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIEW_PUSH_PROTECTED_ONLY" value="true" />
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--follow-tags" />
+        <option name="title" value="Current Branch" />
+      </GitPushTagMode>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;miyad-islam&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/miyad-islam/govbdscraper.git&quot;,
+    &quot;accountId&quot;: &quot;0d7a02da-1004-4158-8c3a-14a901ed9ba7&quot;
+  }
+}</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/main.py" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2sww5UhvM0YB2kScsY72fHmJ7H2" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Python tests.Python tests in main.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.2 (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.extract_information.executor&quot;: &quot;Run&quot;,
+    &quot;Python.juij.executor&quot;: &quot;Run&quot;,
+    &quot;Python.just.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.new.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test1.executor&quot;: &quot;Run&quot;,
+    &quot;Python.webscrap.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Miyad/Desktop/instagram project/govbdscraper/test&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMConfigurable&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Miyad\Desktop\instagram project\govbdscraper\test" />
+      <recent name="C:\Users\Miyad\Desktop\instagram project\govbdscraper" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.main">
+    <configuration name="2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="govbdscraper" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="extract_information" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="govbdscraper" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/extract_information.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="govbdscraper" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="govbdscraper" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="webscrap" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="govbdscraper" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/webscrap.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.webscrap" />
+        <item itemvalue="Python.main (1)" />
+        <item itemvalue="Python.2" />
+        <item itemvalue="Python.extract_information" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-a5bc9544c897-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.23654.177" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="86d595a0-d88b-41fd-85c1-b7197c708599" name="Changes" comment="" />
+      <created>1739379761744</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1739379761744</updated>
+    </task>
+    <task id="LOCAL-00001" summary="all raw code done">
+      <option name="closed" value="true" />
+      <created>1739527324296</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1739527324296</updated>
+    </task>
+    <task id="LOCAL-00002" summary="all raw code done">
+      <option name="closed" value="true" />
+      <created>1739527432690</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1739527432690</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Dir done">
+      <option name="closed" value="true" />
+      <created>1739533115062</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1739533115062</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Perfect">
+      <option name="closed" value="true" />
+      <created>1739950333654</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1739950333654</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Perfect">
+      <option name="closed" value="true" />
+      <created>1739950621113</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1739950621113</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat: Implement web scraping and data extraction&#10;&#10;This commit introduces a web scraping tool that crawls a given&#10;URL, scrapes the page content, and extracts specific information based&#10;on user-defined criteria.&#10;&#10;The changes include:&#10;- Added `.gitignore` and `.idea` configuration files.&#10;- Created `extract_information.py` to handle data extraction&#10;  from the scraped HTML.&#10;- Modified `main.py` to integrate web scraping with the&#10;  information extraction process, taking user input for extraction&#10;  type ('class' or 'id') and target name.&#10;- Added functionality to save visited URLs and extracted data&#10;  into JSON files.&#10;- Created word docx file to save extracted data.&#10;&#10;This commit adds significant functionality to the project,&#10;providing a base for targeted data extraction from websites.">
+      <option name="closed" value="true" />
+      <created>1739952327948</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1739952327948</updated>
+    </task>
+    <task id="LOCAL-00007" summary="feat: Add requirements.txt and update README.md&#10;&#10;This commit introduces a `requirements.txt` file to manage&#10;project dependencies and updates the `README.md` file to&#10;provide a more comprehensive project description, including&#10;features like automated data extraction, customizable scraping,&#10;data export, and error handling.">
+      <option name="closed" value="true" />
+      <created>1739953699821</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1739953699821</updated>
+    </task>
+    <task id="LOCAL-00008" summary="feat: Implement GUI with Tkinter for web scraping and data extraction&#10;&#10;This commit introduces a graphical user interface (GUI) using Tkinter&#10;to provide a more user-friendly experience for the web scraping and&#10;data extraction process.  The GUI allows users to input a URL,&#10;initiate web scraping, and then specify whether to extract data based&#10;on class or ID, along with the corresponding name. Error handling and&#10;user feedback are provided through message boxes. The `pyfiglet`&#10;library has been integrated to display an ASCII art title.">
+      <option name="closed" value="true" />
+      <created>1739957585666</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1739957585666</updated>
+    </task>
+    <task id="LOCAL-00009" summary="feat: Implement web scraping GUI using CustomTkinter&#10;&#10;This commit introduces a modern GUI for the web scraper&#10;using the CustomTkinter library. The GUI includes input&#10;fields for the URL, browse button to select file, radio&#10;buttons to select class or id, displays loading,&#10;extraction buttons, and overall improved user experience.&#10;&#10;Includes code to improve webscrap.py to have human-like browser.">
+      <option name="closed" value="true" />
+      <created>1741866151266</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1741866151266</updated>
+    </task>
+    <task id="LOCAL-00010" summary="feat: Implement dynamic web scraping and data extraction&#10;&#10;This commit introduces several enhancements:&#10;&#10;- Added a stop crawling button to the GUI&#10;- Integrated a dynamic target extraction mechanism.&#10;- Modified the extraction functionality to accept multiple class/ID&#10;  targets using a string format.&#10;- Enhanced the UI to accommodate the new extraction features,&#10;  including a JSON file selection.&#10;- Changed set_appearance_mode to system from dark&#10;- Save the scraper instance to stop driver when GUI stop">
+      <option name="closed" value="true" />
+      <created>1742070578954</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1742070578954</updated>
+    </task>
+    <task id="LOCAL-00011" summary="feat: Add stop scraping functionality and UI improvements&#10;&#10;This commit introduces the ability to stop the web scraping process&#10;mid-crawl. A stop button has been added to the main UI, which sets&#10;a `stop_flag` in the `WebScraper` class. This flag is checked&#10;periodically during crawling to halt the process gracefully.&#10;&#10;Additional changes:&#10;&#10;- The UI now includes an &quot;Exit&quot; button to close the application.&#10;- The application title in the ascii art is now &quot;Scraper&quot;.&#10;- The layout of the buttons has been improved.&#10;- Fixed an error where the scraping error callback would trigger after&#10;  stopping the scraper.&#10;- Changed &quot;Start Over&quot; button to &quot;Back to main&quot;.">
+      <option name="closed" value="true" />
+      <created>1742237890632</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1742237890632</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="all raw code done" />
+    <MESSAGE value="Dir done" />
+    <MESSAGE value="the main file added" />
+    <MESSAGE value="Perfect" />
+    <MESSAGE value="feat: Implement web scraping and data extraction&#10;&#10;This commit introduces a web scraping tool that crawls a given&#10;URL, scrapes the page content, and extracts specific information based&#10;on user-defined criteria.&#10;&#10;The changes include:&#10;- Added `.gitignore` and `.idea` configuration files.&#10;- Created `extract_information.py` to handle data extraction&#10;  from the scraped HTML.&#10;- Modified `main.py` to integrate web scraping with the&#10;  information extraction process, taking user input for extraction&#10;  type ('class' or 'id') and target name.&#10;- Added functionality to save visited URLs and extracted data&#10;  into JSON files.&#10;- Created word docx file to save extracted data.&#10;&#10;This commit adds significant functionality to the project,&#10;providing a base for targeted data extraction from websites." />
+    <MESSAGE value="feat: Add requirements.txt and update README.md&#10;&#10;This commit introduces a `requirements.txt` file to manage&#10;project dependencies and updates the `README.md` file to&#10;provide a more comprehensive project description, including&#10;features like automated data extraction, customizable scraping,&#10;data export, and error handling." />
+    <MESSAGE value="feat: Implement GUI with Tkinter for web scraping and data extraction&#10;&#10;This commit introduces a graphical user interface (GUI) using Tkinter&#10;to provide a more user-friendly experience for the web scraping and&#10;data extraction process.  The GUI allows users to input a URL,&#10;initiate web scraping, and then specify whether to extract data based&#10;on class or ID, along with the corresponding name. Error handling and&#10;user feedback are provided through message boxes. The `pyfiglet`&#10;library has been integrated to display an ASCII art title." />
+    <MESSAGE value="feat: Implement web scraping GUI using CustomTkinter&#10;&#10;This commit introduces a modern GUI for the web scraper&#10;using the CustomTkinter library. The GUI includes input&#10;fields for the URL, browse button to select file, radio&#10;buttons to select class or id, displays loading,&#10;extraction buttons, and overall improved user experience.&#10;&#10;Includes code to improve webscrap.py to have human-like browser." />
+    <MESSAGE value="feat: Implement data extraction and UI enhancements&#10;&#10;- Added a stop button to halt the crawling process.&#10;- Improved data extraction with mixed class/ID targetting.&#10;- Enhanced UI for better user experience." />
+    <MESSAGE value="feat: Implement dynamic web scraping and data extraction&#10;&#10;This commit introduces several enhancements:&#10;&#10;- Added a stop crawling button to the GUI&#10;- Integrated a dynamic target extraction mechanism.&#10;- Modified the extraction functionality to accept multiple class/ID&#10;  targets using a string format.&#10;- Enhanced the UI to accommodate the new extraction features,&#10;  including a JSON file selection.&#10;- Changed set_appearance_mode to system from dark&#10;- Save the scraper instance to stop driver when GUI stop" />
+    <MESSAGE value="feat: Add stop scraping functionality and UI improvements&#10;&#10;This commit introduces the ability to stop the web scraping process&#10;mid-crawl. A stop button has been added to the main UI, which sets&#10;a `stop_flag` in the `WebScraper` class. This flag is checked&#10;periodically during crawling to halt the process gracefully.&#10;&#10;Additional changes:&#10;&#10;- The UI now includes an &quot;Exit&quot; button to close the application.&#10;- The application title in the ascii art is now &quot;Scraper&quot;.&#10;- The layout of the buttons has been improved.&#10;- Fixed an error where the scraping error callback would trigger after&#10;  stopping the scraper.&#10;- Changed &quot;Start Over&quot; button to &quot;Back to main&quot;." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Add stop scraping functionality and UI improvements&#10;&#10;This commit introduces the ability to stop the web scraping process&#10;mid-crawl. A stop button has been added to the main UI, which sets&#10;a `stop_flag` in the `WebScraper` class. This flag is checked&#10;periodically during crawling to halt the process gracefully.&#10;&#10;Additional changes:&#10;&#10;- The UI now includes an &quot;Exit&quot; button to close the application.&#10;- The application title in the ascii art is now &quot;Scraper&quot;.&#10;- The layout of the buttons has been improved.&#10;- Fixed an error where the scraping error callback would trigger after&#10;  stopping the scraper.&#10;- Changed &quot;Start Over&quot; button to &quot;Back to main&quot;." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/test/2.py</url>
+          <line>541</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
