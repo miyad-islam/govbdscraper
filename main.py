@@ -4,7 +4,7 @@ from webscrap import WebScraper
 import extract_information
 import pyfiglet
 import threading
-
+# ..
 # Set appearance and color theme
 ctk.set_appearance_mode("system")  # Modes: "System", "Dark", "Light"
 ctk.set_default_color_theme("blue")  # Themes: "blue", "green", "dark-blue"
