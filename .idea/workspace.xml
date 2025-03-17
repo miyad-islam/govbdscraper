@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="86d595a0-d88b-41fd-85c1-b7197c708599" name="Changes" comment="feat: Add stop scraping functionality and UI improvements&#10;&#10;This commit introduces the ability to stop the web scraping process&#10;mid-crawl. A stop button has been added to the main UI, which sets&#10;a `stop_flag` in the `WebScraper` class. This flag is checked&#10;periodically during crawling to halt the process gracefully.&#10;&#10;Additional changes:&#10;&#10;- The UI now includes an &quot;Exit&quot; button to close the application.&#10;- The application title in the ascii art is now &quot;Scraper&quot;.&#10;- The layout of the buttons has been improved.&#10;- Fixed an error where the scraping error callback would trigger after&#10;  stopping the scraper.&#10;- Changed &quot;Start Over&quot; button to &quot;Back to main&quot;.">
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-    </list>
+    <list default="true" id="86d595a0-d88b-41fd-85c1-b7197c708599" name="Changes" comment="feat: Implement dark mode toggle and app logo&#10;&#10;This commit introduces a dark mode toggle for the&#10;application and adds a logo for improved branding.&#10;A dark mode toggle button has been implemented. A&#10;container frame has been introduced. The logo has&#10;been integrated into main frame." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,8 +21,8 @@
     <option name="PREVIEW_PUSH_PROTECTED_ONLY" value="true" />
     <option name="PUSH_TAGS">
       <GitPushTagMode>
-        <option name="argument" value="--follow-tags" />
-        <option name="title" value="Current Branch" />
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
       </GitPushTagMode>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -307,7 +305,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742237890632</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="feat: Implement dark mode toggle and app logo&#10;&#10;This commit introduces a dark mode toggle for the&#10;application and adds a logo for improved branding.&#10;A dark mode toggle button has been implemented. A&#10;container frame has been introduced. The logo has&#10;been integrated into main frame.">
+      <option name="closed" value="true" />
+      <created>1742243130059</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1742243130059</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -333,7 +339,8 @@
     <MESSAGE value="feat: Implement data extraction and UI enhancements&#10;&#10;- Added a stop button to halt the crawling process.&#10;- Improved data extraction with mixed class/ID targetting.&#10;- Enhanced UI for better user experience." />
     <MESSAGE value="feat: Implement dynamic web scraping and data extraction&#10;&#10;This commit introduces several enhancements:&#10;&#10;- Added a stop crawling button to the GUI&#10;- Integrated a dynamic target extraction mechanism.&#10;- Modified the extraction functionality to accept multiple class/ID&#10;  targets using a string format.&#10;- Enhanced the UI to accommodate the new extraction features,&#10;  including a JSON file selection.&#10;- Changed set_appearance_mode to system from dark&#10;- Save the scraper instance to stop driver when GUI stop" />
     <MESSAGE value="feat: Add stop scraping functionality and UI improvements&#10;&#10;This commit introduces the ability to stop the web scraping process&#10;mid-crawl. A stop button has been added to the main UI, which sets&#10;a `stop_flag` in the `WebScraper` class. This flag is checked&#10;periodically during crawling to halt the process gracefully.&#10;&#10;Additional changes:&#10;&#10;- The UI now includes an &quot;Exit&quot; button to close the application.&#10;- The application title in the ascii art is now &quot;Scraper&quot;.&#10;- The layout of the buttons has been improved.&#10;- Fixed an error where the scraping error callback would trigger after&#10;  stopping the scraper.&#10;- Changed &quot;Start Over&quot; button to &quot;Back to main&quot;." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Add stop scraping functionality and UI improvements&#10;&#10;This commit introduces the ability to stop the web scraping process&#10;mid-crawl. A stop button has been added to the main UI, which sets&#10;a `stop_flag` in the `WebScraper` class. This flag is checked&#10;periodically during crawling to halt the process gracefully.&#10;&#10;Additional changes:&#10;&#10;- The UI now includes an &quot;Exit&quot; button to close the application.&#10;- The application title in the ascii art is now &quot;Scraper&quot;.&#10;- The layout of the buttons has been improved.&#10;- Fixed an error where the scraping error callback would trigger after&#10;  stopping the scraper.&#10;- Changed &quot;Start Over&quot; button to &quot;Back to main&quot;." />
+    <MESSAGE value="feat: Implement dark mode toggle and app logo&#10;&#10;This commit introduces a dark mode toggle for the&#10;application and adds a logo for improved branding.&#10;A dark mode toggle button has been implemented. A&#10;container frame has been introduced. The logo has&#10;been integrated into main frame." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Implement dark mode toggle and app logo&#10;&#10;This commit introduces a dark mode toggle for the&#10;application and adds a logo for improved branding.&#10;A dark mode toggle button has been implemented. A&#10;container frame has been introduced. The logo has&#10;been integrated into main frame." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
