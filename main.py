@@ -1,10 +1,14 @@
 import customtkinter as ctk
-from tkinter import messagebox, filedialog
+from tkinter import messagebox, filedialog, Image
+
+from customtkinter import CTkImage
+
 from webscrap import WebScraper
 import extract_information
 import pyfiglet
 import threading
-# ..
+from PIL import Image
+
 # Set appearance and color theme
 ctk.set_appearance_mode("system")  # Modes: "System", "Dark", "Light"
 ctk.set_default_color_theme("blue")  # Themes: "blue", "green", "dark-blue"
@@ -26,12 +30,17 @@ class App(ctk.CTk):
         self.animation_active = False
         self.current_thread = None
         self.scraper = None  # Add this line to store the scraper instance
-        # Create main container
-        self.main_frame = ctk.CTkFrame(self, corner_radius=10)
-        self.main_frame.pack(pady=20, padx=20, fill="both", expand=True)
 
-        # ASCII Art Title
-        self.create_ascii_art()
+        # Create a container frame that will hold all content
+        self.container_frame = ctk.CTkFrame (self, corner_radius=10, width=600, height=400)
+        self.container_frame.place (relx=0.5, rely=0.5, anchor="center")
+
+        # Create main container
+        self.main_frame = ctk.CTkFrame (self.container_frame, corner_radius=10)
+        self.main_frame.pack (pady=20, padx=20, fill="both", expand=True)
+
+        # logo
+        self.create_logo()
 
         # URL Input Section
         self.create_url_input()
@@ -45,15 +54,23 @@ class App(ctk.CTk):
 
         self.url_entry.bind("<Return>", lambda event: self.start_scraping())
 
-    def create_ascii_art(self):
-        ascii_art = pyfiglet.figlet_format("Scraper")
-        self.title_label = ctk.CTkLabel(
-            self.main_frame,
-            text=ascii_art,
-            font=ctk.CTkFont(family="Courier", size=14),
-            text_color="#2CC985"
-        )
-        self.title_label.pack(pady=20)
+
+
+    def create_logo(self):
+        try:
+            # Load the image
+            logo_image = Image.open ("image/logo.png")  # Correct path to your logo image
+            logo_image = logo_image.resize ((200, 100))  # Resize to fit your design
+
+            # Convert to CTkImage
+            logo_ctk_image = CTkImage (logo_image, size=(200, 100))
+
+            # Create CTkLabel with the CTkImage
+            self.logo_label = ctk.CTkLabel (self.main_frame, image=logo_ctk_image, text="")
+            self.logo_label.image = logo_ctk_image  # Keep a reference to the image
+            self.logo_label.pack (pady=20)
+        except Exception as e:
+            messagebox.showerror ("Error", f"Failed to load logo: {str (e)}")
 
     def create_url_input(self):
         url_frame = ctk.CTkFrame(self.main_frame, fg_color="transparent")
