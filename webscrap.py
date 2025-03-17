@@ -117,7 +117,7 @@ class WebScraper:
             self.save_data()
             self.save_visited_urls()
 
-            # Find all internal links
+            # Find all internal links and filter invalid ones
             links = self.driver.find_elements(By.TAG_NAME, "a")
             for link in links:
                 if self.stop_flag:
@@ -125,6 +125,9 @@ class WebScraper:
                 href = link.get_attribute("href")
                 if href and self.domain in urlparse(href).netloc:
                     full_url = urljoin(self.base_url, href)
+                    # Skip URLs with invalid patterns (customize as needed)
+                    if "nolink" in full_url or full_url.endswith("[front]"):
+                        continue
                     if full_url.startswith(self.base_url) and full_url not in self.visited_urls:
                         self.crawl_and_scrape(full_url)
         except Exception as e:

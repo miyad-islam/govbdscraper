@@ -1,3 +1,6 @@
+import os
+import sys
+
 import customtkinter as ctk
 from tkinter import messagebox, filedialog, Image
 
@@ -5,7 +8,6 @@ from customtkinter import CTkImage
 
 from webscrap import WebScraper
 import extract_information
-import pyfiglet
 import threading
 from PIL import Image
 
@@ -55,25 +57,28 @@ class App(ctk.CTk):
 
         self.url_entry.bind("<Return>", lambda event: self.start_scraping())
 
-
-
     def create_logo(self):
         try:
-            # Load the image
-            logo_image = Image.open ("image/logo.png")  # Correct path to your logo image
-            logo_image = logo_image.resize ((200, 100))  # Resize to fit your design
+            # Get the correct base path for bundled data
+            if getattr(sys, 'frozen', False):
+                base_path = sys._MEIPASS
+            else:
+                base_path = os.path.dirname(os.path.abspath(__file__))
 
-            # Convert to CTkImage
-            logo_ctk_image = CTkImage (logo_image, size=(200, 100))
+            # Construct the full image path
+            logo_path = os.path.join(base_path, "image", "logo.png")
 
-            # Create CTkLabel with the CTkImage
-            self.logo_label = ctk.CTkLabel (self.main_frame, image=logo_ctk_image, text="")
-            self.logo_label.image = logo_ctk_image  # Keep a reference to the image
-            self.logo_label.pack (pady=20)
+            # Load and resize the image
+            logo_image = Image.open(logo_path)
+            logo_image = logo_image.resize((200, 100))
 
+            # Convert to CTkImage and display
+            logo_ctk_image = CTkImage(logo_image, size=(200, 100))
+            self.logo_label = ctk.CTkLabel(self.main_frame, image=logo_ctk_image, text="")
+            self.logo_label.pack(pady=20)
 
         except Exception as e:
-            messagebox.showerror ("Error", f"Failed to load logo: {str (e)}")
+            messagebox.showerror("Error", f"Failed to load logo: {str(e)}")
 
     def create_theme_toggle(self):
         self.theme_toggle = ctk.CTkButton(
