@@ -33,6 +33,9 @@
     &quot;assignee&quot;: &quot;miyad-islam&quot;
   }
 }</component>
+  <component name="GitRewordedCommitMessages">
+    <option name="onto" value="03104c704e9b86bfb3959d14ba92d33028711c28" />
+  </component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/miyad-islam/govbdscraper.git&quot;,
@@ -69,7 +72,6 @@
     &quot;Python.webscrap.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Miyad/Desktop/instagram project/govbdscraper/test&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMConfigurable&quot;
   }
@@ -313,7 +315,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742243130059</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="feat: Implement dark mode toggle and app logo&#10;&#10;This commit introduces a dark mode toggle for the&#10;application and adds a logo for improved branding.&#10;A dark mode toggle button has been implemented. A&#10;container frame has been introduced. The logo has&#10;been integrated into main frame.">
+      <option name="closed" value="true" />
+      <created>1742243430371</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1742243430371</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
